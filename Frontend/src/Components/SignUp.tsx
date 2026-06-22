@@ -2,8 +2,12 @@ import { useState } from "react";
 import { User, Mail, BriefcaseBusiness, Sparkles , Lock} from "lucide-react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useDispatch,useSelector } from "react-redux";
+import {setData} from "../Redux/Feature/NotificationSlice.js"
 
 export default function SignUp() {
+  const dispatch=useDispatch()
+  const notification=useSelector((store)=>store.Notification.data)
   const navigate = useNavigate()
   const [formData, setFormData] = useState({
     name: "",
@@ -11,12 +15,11 @@ export default function SignUp() {
     password: "",
     shopName: ""
   });
-  const [notification , setNotification] = useState("")
+  
   const [loading ,setLoading] = useState(false)
 
   const handleAction = async(e) => {
     try {
-
       e.preventDefault();
       setLoading(true)
   const response = await axios.post("http://localhost:3000/api/signup" , formData , {
@@ -25,17 +28,17 @@ export default function SignUp() {
   if(response.status == 201) {
     const msg = response.data?.message ?? "Sign up";
     navigate("/Dashbord")
-    setNotification(msg)
+    dispatch(setData(msg))
     setTimeout(() => {
-    setNotification("")
+    dispatch(setData(""))
     }, 2000)
   }
   console.log(response)
     }catch(error) {
      console.log(error)
-     setNotification("Error in loading")
+     dispatch(setData("Something went wrong"))
      setTimeout(() => {
-     setNotification("")
+     dispatch(setData(""))
      } ,2000)
     }finally{
      setLoading(false)
