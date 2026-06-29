@@ -27,7 +27,7 @@ router.delete(
 );
 
 router.get(
-  "/ShopInfo/:shopId",
+  "/ShopInfo",
   isloggedin,
   renderShop
 );

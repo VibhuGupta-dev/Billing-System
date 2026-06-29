@@ -3,7 +3,7 @@ import { Home } from "./Pages/Home";
 import AuthPage from "./Pages/AuthPage";
 //import {About} from "./Pages/About";
 //import { Login } from "./Pages/Login";
-
+import { ShopPage } from "./Pages/ShopPage";
 
 function App() {
 
@@ -12,7 +12,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} /> 
         <Route path="/auth" element={<AuthPage />}></Route>
-       {/* // ?<Route path="/login" element={<Login />}></Route> */} 
+       <Route path="/Dashboad" element={<ShopPage />}></Route> 
       </Routes>  
     </Router>
   );

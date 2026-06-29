@@ -17,6 +17,12 @@ export async function createShop(req: Request, res: Response) {
       ShopIsOnRent,
       ShopRent,
     } = req.body;
+    console.log(ShopName,
+      Industry,
+      NumberOfWorkers,
+      ElectricityPerUnitRate,
+      ShopIsOnRent,
+      ShopRent,)
 
     if(typeof ShopName!=="string"|| !ShopName.trim()){
       return res.status(400).json({message:"Invalid ShopName type"})
@@ -26,28 +32,10 @@ export async function createShop(req: Request, res: Response) {
       return res.status(400).json({message:"Invalid Industry type"})
     }
 
-    if(isNaN(Number(NumberOfWorkers))||NumberOfWorkers<0||typeof NumberOfWorkers!=="number"){
-      return res.status(400).json({message:"Invalid No of Workers"})
-    }
-
-    if(isNaN(Number(ElectricityPerUnitRate))||ElectricityPerUnitRate<0||typeof ElectricityPerUnitRate!=="number"){
-      return res.status(400).json({message:"Invalid Electricity Per Unit Rate"})
-    }
-
-    if(typeof ShopIsOnRent !== "boolean"){
-      return res.status(400).json({message:"Invalid Type for Shop is On Rent"})
-    }
-
-    if(isNaN(Number(ShopRent))||ShopRent<0||typeof ShopRent !=="number"){
-      return res.status(400).json({message:"Invalid Shop Rent Type"})
-    }
 
     const ShopPhoto = req.file ? `/uploads/${req.file.filename}` : null;
-
-    if (ShopPhoto && typeof ShopPhoto !== "string") {
-           return res.status(400).json({ message: "Invalid Shop photo type" })
-        }
-
+ console.log(ShopPhoto)
+    
     await ShopModel.create({
       UserId: userId, // 🔥 LOGGED IN USER ID
       ShopName,
@@ -175,22 +163,15 @@ export async function delShop(req:Request,res:Response){
  
 export async function renderShop(req: Request, res: Response) {
   try {
+        console.log("clicked")
+
     const userId = req.userId?.toString();
     if(typeof userId !=="string"||!mongoose.Types.ObjectId.isValid(userId))
     {
       return res.status(400).json({message:"Invalid user"})
     }
 
-    const shopId = req.params.shopId;
-    if(typeof shopId !=="string"||!mongoose.Types.ObjectId.isValid(shopId))
-    {
-      return res.status(400).json({message:"Invalid shop"})
-    }
-
-    const store = await ShopModel.findOne({
-      UserId: userId,
-      _id: shopId,
-    });
+    const store = await ShopModel.find({UserId: userId});
 
     if (!store) {
       return res.status(404).json({ message: "Shop Not Found" });
