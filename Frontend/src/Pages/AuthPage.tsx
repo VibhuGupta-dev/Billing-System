@@ -4,7 +4,7 @@ import SignUp from "../Components/SignUp";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Receipt, TrendingUp, Wallet, ArrowLeft } from "lucide-react";
-
+import Notification from "../Components/Notification";
 
 // Smooth Orchestrated Container Variants
 const containerVariants = {
@@ -49,7 +49,9 @@ export default function AuthPage() {
 
       {/* Full Screen Layout with Responsive Padding */}
       <section className="font-display relative min-h-screen w-full overflow-y-auto lg:overflow-hidden bg-[radial-gradient(circle_at_center,_#1c1c1e_0%,_#0a0a0a_100%)] text-zinc-100 flex items-center justify-center p-4 md:p-8 selection:bg-zinc-800">
-        
+        <div className="absolute top-4 right-4 z-20 ">
+          <Notification />
+        </div>
         {/* SVG Grain Noise Overlay */}
         <div className="absolute inset-0 pointer-events-none opacity-[0.13] mix-blend-overlay z-0">
           <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">

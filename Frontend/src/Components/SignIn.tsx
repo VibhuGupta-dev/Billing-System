@@ -2,14 +2,14 @@ import React, { FormEvent, useEffect, useRef, useState } from "react";
 import { Mail, Lock, ArrowUpRight } from "lucide-react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { useDispatch , useSelector } from "react-redux";
+import { useDispatch} from "react-redux";
 import {setData} from "../Redux/Feature/NotificationSlice.js"
- 
+
 type FormData = { email: string; password: string };
 
 export default function Login(): JSX.Element {
   const dispatch = useDispatch()
-  const notification = useSelector((store) => store.Notification.data)
+  
   const [formData, setFormData] = useState<FormData>({ email: "", password: "" });
   const [loading, setLoading] = useState<boolean>(false);
   const timeoutRef = useRef<number | null>(null);
@@ -39,7 +39,7 @@ export default function Login(): JSX.Element {
         timeoutRef.current = window.setTimeout(() => dispatch(setData("")), 2000);
         navigate("/Dashboad")
       }
-    } catch (err: any) {
+    } catch (err) {
       const msg = err?.response?.data?.message ?? "Wrong login credentials";
       dispatch(setData(msg))
       timeoutRef.current = window.setTimeout(() => dispatch(setData("")), 2000);
@@ -50,7 +50,7 @@ export default function Login(): JSX.Element {
 
   return (
     <div className="">
-      <div className="mb-2 text-sm text-gray-300">{notification}</div>
+      
 
       <form onSubmit={handleAction} className="space-y-4">
         <div className="space-y-1.5">

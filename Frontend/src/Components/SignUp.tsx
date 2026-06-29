@@ -2,12 +2,12 @@ import { useState } from "react";
 import { User, Mail, BriefcaseBusiness, Sparkles , Lock} from "lucide-react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { useDispatch,useSelector } from "react-redux";
+import { useDispatch} from "react-redux";
 import {setData} from "../Redux/Feature/NotificationSlice.js"
 
 export default function SignUp() {
   const dispatch=useDispatch()
-  const notification=useSelector((store)=>store.Notification.data)
+  
   const navigate = useNavigate()
   const [formData, setFormData] = useState({
     name: "",
@@ -47,12 +47,6 @@ export default function SignUp() {
 
   return (
     <div className="">
-
-      <div className="">
-    <div className="mb-2 text-sm text-gray-300">{notification}</div>
- 
-      </div>
-
     <form onSubmit={handleAction} className="space-y-4">
       <div className="space-y-1.5">
         <label className="text-xs font-medium text-zinc-400">
