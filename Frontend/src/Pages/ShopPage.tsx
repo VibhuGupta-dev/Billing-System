@@ -241,7 +241,7 @@ export function ShopPage() {
 
           {/* ══════════ LEFT ══════════ */}
           <div
-            className="fade-up flex flex-col gap-8  max-h-120 overflow-y-scroll "
+            className="fade-up flex flex-col gap-8  max-h-120 overflow-y-scroll  "
             style={{ animationDelay: "0.1s" }}
           >
             {/* eyebrow */}
@@ -276,8 +276,8 @@ export function ShopPage() {
                   </div>
                   <div className="min-w-0 flex-1 ">
                     <div className="space-y-1 ">
-                      <div className="">
-                        <p className="font-mono mb-1 text-[10px] uppercase tracking-[0.18em] text-neutral-600">
+                      <div className=" ">
+                        <p className=" font-mono mb-1 text-[10px] uppercase tracking-[0.18em] text-neutral-600">
                           Your Shops
                         </p>
                         <p
